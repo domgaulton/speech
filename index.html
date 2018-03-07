@@ -11,6 +11,7 @@
 
 			<p class="hints">Tap/click then say a color to change the background color of the app. Try <span style="background-color:aqua;"> aqua </span><span style="background-color:azure;"> azure </span><span style="background-color:beige;"> beige </span><span style="background-color:bisque;"> bisque </span><span style="background-color:black;"> black </span><span style="background-color:blue;"> blue </span><span style="background-color:brown;"> brown </span><span style="background-color:chocolate;"> chocolate </span><span style="background-color:coral;"> coral </span><span style="background-color:crimson;"> crimson </span><span style="background-color:cyan;"> cyan </span><span style="background-color:fuchsia;"> fuchsia </span><span style="background-color:ghostwhite;"> ghostwhite </span><span style="background-color:gold;"> gold </span><span style="background-color:goldenrod;"> goldenrod </span><span style="background-color:gray;"> gray </span><span style="background-color:green;"> green </span><span style="background-color:indigo;"> indigo </span><span style="background-color:ivory;"> ivory </span><span style="background-color:khaki;"> khaki </span><span style="background-color:lavender;"> lavender </span><span style="background-color:lime;"> lime </span><span style="background-color:linen;"> linen </span><span style="background-color:magenta;"> magenta </span><span style="background-color:maroon;"> maroon </span><span style="background-color:moccasin;"> moccasin </span><span style="background-color:navy;"> navy </span><span style="background-color:olive;"> olive </span><span style="background-color:orange;"> orange </span><span style="background-color:orchid;"> orchid </span><span style="background-color:peru;"> peru </span><span style="background-color:pink;"> pink </span><span style="background-color:plum;"> plum </span><span style="background-color:purple;"> purple </span><span style="background-color:red;"> red </span><span style="background-color:salmon;"> salmon </span><span style="background-color:sienna;"> sienna </span><span style="background-color:silver;"> silver </span><span style="background-color:snow;"> snow </span><span style="background-color:tan;"> tan </span><span style="background-color:teal;"> teal </span><span style="background-color:thistle;"> thistle </span><span style="background-color:tomato;"> tomato </span><span style="background-color:turquoise;"> turquoise </span><span style="background-color:violet;"> violet </span><span style="background-color:white;"> white </span><span style="background-color:yellow;"> yellow </span>.</p>
 				
+			<div class="clickMe">ClickMe</div>
 			<div>
 				<p class="output"></p>
 			</div>
@@ -33,6 +34,7 @@
 		recognition.interimResults = false;
 		recognition.maxAlternatives = 1;
 
+		var clickMe = document.querySelector('.clickMe');
 		var diagnostic = document.querySelector('.output');
 		var bg = document.querySelector('html');
 		var hints = document.querySelector('.hints');
@@ -46,7 +48,7 @@
 
 		hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try '+ colorHTML + '.';
 
-		document.body.onclick = function() {
+		clickMe.onclick = function() {
 			recognition.start();
 			console.log('Ready to receive a color command.');
 			diagnostic.innerHTML = 'Ready to recieve a colour command...';

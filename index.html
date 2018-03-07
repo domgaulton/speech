@@ -30,7 +30,7 @@
 		speechRecognitionList.addFromString(grammar, 1);
 		recognition.grammars = speechRecognitionList;
 		//recognition.continuous = false;
-		recognition.lang = 'en-US';
+		recognition.lang = 'en-GB';
 		recognition.interimResults = false;
 		recognition.maxAlternatives = 1;
 
@@ -68,7 +68,7 @@
 			var last = event.results.length - 1;
 			var color = event.results[last][0].transcript;
 
-			diagnostic.textContent = 'Result received: ' + color + '.';
+			diagnostic.textContent = 'Result received: ' + color + '. Confidence Level: ' + event.results[0][0].confidence;
 			bg.style.backgroundColor = color;
 			console.log('Confidence: ' + event.results[0][0].confidence);
 		}

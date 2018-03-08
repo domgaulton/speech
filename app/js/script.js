@@ -1,4 +1,3 @@
-
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -39,7 +38,9 @@ recognition.onresult = function(event) {
 
 	// var last = event.results.length - 1;
 	// var speech = event.results[last][0].transcript;
+	
 	var speech = event.results[0][0].transcript;
+	// var speech = 'hello';
 
 	diagnostic.textContent = 'Result received: ' + speech + '. Confidence Level: ' + event.results[0][0].confidence;
 	transcript.textContent = speech;
@@ -56,5 +57,6 @@ recognition.onnomatch = function(event) {
 }
 
 recognition.onerror = function(event) {
-	diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+	diagnostic.textContent = 'Error occurred: ' + event.error;
 }
+

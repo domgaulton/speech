@@ -1,10 +1,14 @@
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+// var SpeechSynthesisUtterance = SpeechSynthesisUtterance || webkitSpeechSynthesisUtterance
+
 // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+// var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 // var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
 
 var recognition = new SpeechRecognition();
+// var utterance = new SpeechSynthesisUtterance();
+
 // var speechRecognitionList = new SpeechGrammarList();
 // speechRecognitionList.addFromString(grammar, 1);
 // recognition.grammars = speechRecognitionList;
@@ -12,7 +16,7 @@ var recognition = new SpeechRecognition();
 
 recognition.lang = 'en-GB';
 recognition.interimResults = false;
-recognition.maxAlternatives = 3;
+recognition.maxAlternatives = 1;
 
 var clickMe = document.querySelector('.click-me');
 var diagnostic = document.querySelector('.output');
@@ -30,7 +34,14 @@ clickMe.onclick = function() {
 	// console.log('Listening...');
 	diagnostic.innerHTML = 'Listening...';
 	recognition.start();
+
 }
+
+recognition.onsoundstart = function(event) {
+  console.log(event);
+  // utterance.volume();
+}
+
 
 recognition.onresult = function(event) {
 	// The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
@@ -61,9 +72,9 @@ recognition.onspeechend = function() {
 	recognition.stop();
 }
 
-recognition.onnomatch = function(event) {
-	diagnostic.textContent = "I didn't recognise that color.";
-}
+// recognition.onnomatch = function(event) {
+// 	diagnostic.textContent = "I didn't recognise that color.";
+// }
 
 recognition.onerror = function(event) {
 	// console.log(event.error);

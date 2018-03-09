@@ -20,13 +20,14 @@ var transcript = document.querySelector('.transcript');
 var titleField = document.querySelector('.title');
 var ytIDField = document.querySelector('.ytID');
 var thumbnailField = document.querySelector('.thumbnail');
+var ytPlayer = document.querySelector('#player');
 
 // var bg = document.querySelector('html');
 var speech;
 
 clickMe.onclick = function() {
 	
-	console.log('Listening...');
+	// console.log('Listening...');
 	diagnostic.innerHTML = 'Listening...';
 	recognition.start();
 }
@@ -41,7 +42,7 @@ recognition.onresult = function(event) {
 	// The [0] returns the SpeechRecognitionAlternative at position 0.
 	// We then return the transcript property of the SpeechRecognitionAlternative object
 
-	console.log(event);
+	// console.log(event);
 
 	// var last = event.results.length - 1;
 	// var speech = event.results[last][0].transcript;
@@ -94,7 +95,7 @@ function onYouTubeApiLoad() {
 }
 
 function search(result) {
-	console.log('search'+result);
+	// console.log('search'+result);
     // Use the JavaScript client library to create a search.list() API call.
     var request = gapi.client.youtube.search.list({
         part: 'snippet',
@@ -116,9 +117,77 @@ function onSearchResponse(response) {
     var ytID = response.items[0].id.videoId;
     var thumbnail = response.items[0].snippet.thumbnails.medium.url;
 
-   	titleField.textContent = title;
-   	ytIDField.textContent = ytID;
-	thumbnailField.src = thumbnail;
+    // ytPlayer.getAttribute('title') ? player.loadVideoById(ytID) : youtubePlayer(ytID);
+
+    titleField.textContent = title;
+    ytIDField.textContent = ytID;
+    thumbnailField.src = thumbnail;
+
+    if ( document.querySelector('#player').getAttribute('title') ) {
+      // console.log('title exists');
+      player.loadVideoById(ytID)
+    } else {
+      // console.log('title doesnt exist');
+      youtubePlayer(ytID);
+    }
+
 
     // console.log(id);
 }
+
+
+// // 2. This code loads the IFrame Player API code asynchronously.
+// var tag = document.createElement('script');
+
+// tag.src = "https://www.youtube.com/iframe_api";
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+
+var player;
+
+// function onYouTubeIframeAPIReady() {
+//   player = new YT.Player('player', {
+//     height: '390',
+//     width: '640',
+//     videoId: 'IutULT1kVMA',
+//     events: {
+//       'onReady': onPlayerReady
+//       // 'onStateChange': onPlayerStateChange
+//     }
+//   });
+// }
+
+function youtubePlayer(ytID) {
+  player = new YT.Player('player', {
+    height: '390',
+    width: '640',
+    videoId: ytID,
+    events: {
+      'onReady': onPlayerReady
+      // 'onStateChange': onPlayerStateChange
+    }
+  });
+}
+
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+	event.target.playVideo();
+}
+
+// // 5. The API calls this function when the player's state changes.
+// //    The function indicates that when playing a video (state=1),
+// //    the player should play for six seconds and then stop.
+// var done = false;
+// function onPlayerStateChange(event) {
+// if (event.data == YT.PlayerState.PLAYING && !done) {
+//   setTimeout(stopVideo, 6000);
+//   done = true;
+// }
+// }
+// function stopVideo() {
+// player.stopVideo();
+// }
+

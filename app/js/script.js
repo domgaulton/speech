@@ -17,7 +17,11 @@ recognition.maxAlternatives = 3;
 var clickMe = document.querySelector('.click-me');
 var diagnostic = document.querySelector('.output');
 var transcript = document.querySelector('.transcript');
-var bg = document.querySelector('html');
+var titleField = document.querySelector('.title');
+var ytIDField = document.querySelector('.ytID');
+var thumbnailField = document.querySelector('.thumbnail');
+
+// var bg = document.querySelector('html');
 var speech;
 
 clickMe.onclick = function() {
@@ -106,6 +110,15 @@ function search(result) {
 function onSearchResponse(response) {
     // showResponse(response);
     // console.log(response);
-    var id = response.items[0].id.videoId;
-    console.log(id);
+    // console.log(response);
+    
+    var title = response.items[0].snippet.title;
+    var ytID = response.items[0].id.videoId;
+    var thumbnail = response.items[0].snippet.thumbnails.medium.url;
+
+   	titleField.textContent = title;
+   	ytIDField.textContent = ytID;
+	thumbnailField.src = thumbnail;
+
+    // console.log(id);
 }

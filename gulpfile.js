@@ -33,7 +33,7 @@ gulp.task('copy-html', function () {
 // Copy Folders to Dist //
 
 gulp.task('copy-files', function () {
-    gulp.src([config.app+'**/**/*.*', '!'+config.app+'scss/**/*.*', '!'+config.app+'js/_*.*'])
+    gulp.src([config.app+'**/**/*.*'])
         .pipe(gulp.dest(config.dist));
 });
 
@@ -58,11 +58,7 @@ gulp.task('browser-sync', ['clean'],function() {
 // Concatinate and Uglify to Dist //
 
 gulp.task('scripts', function(){
-    return gulp.src(config.app+'js/_*.js')
-        .pipe(concat('script.js'))
-        .pipe(gulp.dest(config.app+'js'))
-        .pipe(rename('script.js'))
-        .pipe(uglify())
+    return gulp.src(config.app+'js/*.js')
         .pipe(gulp.dest(config.dist+'js'));
 });
 
@@ -70,7 +66,7 @@ gulp.task('scripts', function(){
 
 gulp.task('watch', function(){
     gulp.watch('*.html', ['copy-html']);
-    gulp.watch(config.app+'scss/**/*.scss', ['sass']);
+    // gulp.watch(config.app+'scss/**/*.scss', ['sass']);
     gulp.watch(config.app+'js/**/*.js', ['scripts']);
 })
 

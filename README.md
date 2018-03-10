@@ -7,4 +7,8 @@ Speech
 
 ## YouTube API
 * https://www.codecademy.com/en/courses/javascript-intermediate-en-757J2/0/1?curriculum_id=50ecb8d45f787a6332000042
+
+## Question Answering
 * https://developers.google.com/custom-search/json-api/v1/using_rest
+* https://products.wolframalpha.com/api/
+* https://www.programmableweb.com/api/webknox-question-answering

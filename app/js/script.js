@@ -60,8 +60,10 @@ recognition.onresult = function(event) {
 	
 	var speech = event.results[0][0].transcript;
 
-	diagnostic.textContent = 'Result received: ' + speech + '. Confidence Level: ' + event.results[0][0].confidence;
-	transcript.textContent = speech;
+	// diagnostic.textContent = 'Result received: ' + speech + '. Confidence Level: ' + event.results[0][0].confidence;
+	
+	diagnostic.textContent = "You said: " + speech;
+	//transcript.textContent = speech;
 	// bg.style.backgroundColor = speech;
 	// console.log('Confidence: ' + event.results[0][0].confidence);
 
@@ -126,13 +128,13 @@ function onSearchResponse(response) {
     
     var title = response.items[0].snippet.title;
     var ytID = response.items[0].id.videoId;
-    var thumbnail = response.items[0].snippet.thumbnails.medium.url;
+    // var thumbnail = response.items[0].snippet.thumbnails.medium.url;
 
     // ytPlayer.getAttribute('title') ? player.loadVideoById(ytID) : youtubePlayer(ytID);
 
     titleField.textContent = title;
-    ytIDField.textContent = ytID;
-    thumbnailField.src = thumbnail;
+    // ytIDField.textContent = ytID;
+    // thumbnailField.src = thumbnail;
 
     if ( document.querySelector('#player').getAttribute('title') ) {
       // console.log('title exists');

@@ -33,7 +33,7 @@ gulp.task('copy-html', function () {
 // Copy Folders to Dist //
 
 gulp.task('copy-files', function () {
-    gulp.src([config.app+'**/**/*.*'])
+    gulp.src([config.app+'**/**/*.*', '!'+config.app+'**/*.{html,scss}'])
         .pipe(gulp.dest(config.dist));
 });
 
@@ -66,7 +66,7 @@ gulp.task('scripts', function(){
 
 gulp.task('watch', function(){
     gulp.watch('*.html', ['copy-html']);
-    // gulp.watch(config.app+'scss/**/*.scss', ['sass']);
+    gulp.watch(config.app+'scss/**/*.scss', ['sass']);
     gulp.watch(config.app+'js/**/*.js', ['scripts']);
 })
 

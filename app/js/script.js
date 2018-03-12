@@ -87,7 +87,7 @@ recognition.onerror = function(event) {
 
 function answer() {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.wolframalpha.com/v1/result?appid=27LAYV-JVWUHLR5JQ&i=how+old+is+obama');
+  xhr.open('GET', 'http://api.wolframalpha.com/v2/query?appid=27LAYV-JVWUHLR5JQ&input=population%20of%20france');
   xhr.send(null);
 };
 

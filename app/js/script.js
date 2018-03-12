@@ -33,14 +33,16 @@ clickMe.onclick = function() {
 	
 	// console.log('Listening...');
 	diagnostic.innerHTML = 'Listening...';
-	recognition.start();
+	
+  recognition.start();
+  //answerMe('what is the share price of twitter');
 
 }
 
-recognition.onsoundstart = function(event) {
-  console.log(event);
-  // utterance.volume();
-}
+// recognition.onsoundstart = function(event) {
+//   console.log(event);
+//   // utterance.volume();
+// }
 
 
 recognition.onresult = function(event) {
@@ -67,7 +69,11 @@ recognition.onresult = function(event) {
 	// bg.style.backgroundColor = speech;
 	// console.log('Confidence: ' + event.results[0][0].confidence);
 
-	search(speech);
+  if ( speech.startsWith("play") ) {
+    searchYouTube(speech);
+  } else {
+    answerMe(speech);
+  }
 }
 
 recognition.onspeechend = function() {
@@ -81,8 +87,28 @@ recognition.onspeechend = function() {
 recognition.onerror = function(event) {
 	// console.log(event.error);
 	diagnostic.textContent = 'Error occurred: ' + event.error;
-
 }
+
+function answerMe(question) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.wolframalpha.com/v1/result?i=' + question + '&appid=27LAYV-JVWUHLR5JQ');
+  xhr.send(null);
+
+  xhr.onreadystatechange = function () {
+  var DONE = 4; // readyState 4 means the request is done.
+  var OK = 200; // status 200 is a successful return.
+  if (xhr.readyState === DONE) {
+    if (xhr.status === OK) 
+      titleField.textContent = xhr.responseText; // 'This is the returned text.'
+      console.log(xhr.responseText);
+    } else {
+      titleField.textContent = 'Error: ' + xhr.status; // An error occurred during the request.
+      console.log(xhr.status);
+    }
+  }
+};
+
+
 
 // Your use of the YouTube API must comply with the Terms of Service:
 // https://developers.google.com/youtube/terms
@@ -107,7 +133,7 @@ function onYouTubeApiLoad() {
     // search();
 }
 
-function search(result) {
+function searchYouTube(result) {
 	// console.log('search'+result);
     // Use the JavaScript client library to create a search.list() API call.
     var request = gapi.client.youtube.search.list({

@@ -33,7 +33,9 @@ clickMe.onclick = function() {
 	
 	// console.log('Listening...');
 	diagnostic.innerHTML = 'Listening...';
-	recognition.start();
+	
+  //recognition.start();
+  answer();
 
 }
 
@@ -81,7 +83,23 @@ recognition.onspeechend = function() {
 recognition.onerror = function(event) {
 	// console.log(event.error);
 	diagnostic.textContent = 'Error occurred: ' + event.error;
+}
 
+function answer() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.wolframalpha.com/v1/result?appid=27LAYV-JVWUHLR5JQ&i=how+old+is+obama');
+  xhr.send(null);
+};
+
+xhr.onreadystatechange = function () {
+  var DONE = 4; // readyState 4 means the request is done.
+  var OK = 200; // status 200 is a successful return.
+  if (xhr.readyState === DONE) {
+    if (xhr.status === OK) 
+      console.log(xhr.responseText); // 'This is the returned text.'
+    } else {
+      console.log('Error: ' + xhr.status); // An error occurred during the request.
+    }
 }
 
 // Your use of the YouTube API must comply with the Terms of Service:

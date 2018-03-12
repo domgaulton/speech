@@ -34,15 +34,15 @@ clickMe.onclick = function() {
 	// console.log('Listening...');
 	diagnostic.innerHTML = 'Listening...';
 	
-  //recognition.start();
-  answerMe();
+  recognition.start();
+  //answerMe('what is the share price of twitter');
 
 }
 
-recognition.onsoundstart = function(event) {
-  console.log(event);
-  // utterance.volume();
-}
+// recognition.onsoundstart = function(event) {
+//   console.log(event);
+//   // utterance.volume();
+// }
 
 
 recognition.onresult = function(event) {
@@ -69,7 +69,8 @@ recognition.onresult = function(event) {
 	// bg.style.backgroundColor = speech;
 	// console.log('Confidence: ' + event.results[0][0].confidence);
 
-	search(speech);
+  answerMe(speech);
+	//search(speech);
 }
 
 recognition.onspeechend = function() {
@@ -85,9 +86,9 @@ recognition.onerror = function(event) {
 	diagnostic.textContent = 'Error occurred: ' + event.error;
 }
 
-function answerMe() {
+function answerMe(question) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://api.wolframalpha.com/v1/result?i=What+is+the+stock+price+of+Twitter%3F&appid=DEMO');
+  xhr.open('GET', 'https://api.wolframalpha.com/v1/result?i=' + question + '&appid=27LAYV-JVWUHLR5JQ');
   xhr.send(null);
 
   xhr.onreadystatechange = function () {
@@ -96,24 +97,12 @@ function answerMe() {
   if (xhr.readyState === DONE) {
     if (xhr.status === OK) 
       diagnostic.textContent = xhr.responseText; // 'This is the returned text.'
+      console.log(xhr.responseText);
     } else {
       diagnostic.textContent = 'Error: ' + xhr.status; // An error occurred during the request.
+      console.log(xhr.status);
     }
   }
-
-  // var xmlHttp = new XMLHttpRequest();
-  // xmlHttp.onreadystatechange = function() { 
-  // if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-  //   //callback(xmlHttp.responseText);
-  //   console.log(xmlHttp.queryresult);
-
-  //   diagnostic.textContent = xmlHttp.queryresult;
-  // }
-
-  // // http://www.whateverorigin.org/get?url=http://api.wolframalpha.com/v2/query?appid=27LAYV-JVWUHLR5JQ&input=population%20of%20france&callback=?
-
-  // xmlHttp.open("GET", "https://api.wolframalpha.com/v1/result?i=What+is+the+stock+price+of+Twitter%3F&appid=DEMO", true); // true for asynchronous 
-  // xmlHttp.send(null);
 };
 
 

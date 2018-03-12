@@ -69,8 +69,11 @@ recognition.onresult = function(event) {
 	// bg.style.backgroundColor = speech;
 	// console.log('Confidence: ' + event.results[0][0].confidence);
 
-  answerMe(speech);
-	//search(speech);
+  if ( speech.startsWith("play") ) {
+    searchYouTube(speech);
+  } else {
+    answerMe(speech);
+  }
 }
 
 recognition.onspeechend = function() {
@@ -96,10 +99,10 @@ function answerMe(question) {
   var OK = 200; // status 200 is a successful return.
   if (xhr.readyState === DONE) {
     if (xhr.status === OK) 
-      diagnostic.textContent = xhr.responseText; // 'This is the returned text.'
+      titleField.textContent = xhr.responseText; // 'This is the returned text.'
       console.log(xhr.responseText);
     } else {
-      diagnostic.textContent = 'Error: ' + xhr.status; // An error occurred during the request.
+      titleField.textContent = 'Error: ' + xhr.status; // An error occurred during the request.
       console.log(xhr.status);
     }
   }
@@ -130,7 +133,7 @@ function onYouTubeApiLoad() {
     // search();
 }
 
-function search(result) {
+function searchYouTube(result) {
 	// console.log('search'+result);
     // Use the JavaScript client library to create a search.list() API call.
     var request = gapi.client.youtube.search.list({

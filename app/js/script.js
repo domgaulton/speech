@@ -35,7 +35,7 @@ clickMe.onclick = function() {
 	diagnostic.innerHTML = 'Listening...';
 	
   //recognition.start();
-  answer();
+  answerMe();
 
 }
 
@@ -85,22 +85,38 @@ recognition.onerror = function(event) {
 	diagnostic.textContent = 'Error occurred: ' + event.error;
 }
 
-function answer() {
+function answerMe() {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'http://api.wolframalpha.com/v2/query?appid=27LAYV-JVWUHLR5JQ&input=population%20of%20france');
+  xhr.open('GET', 'http://api.wolframalpha.com/v1/result?i=What+is+the+stock+price+of+Twitter%3F&appid=DEMO');
   xhr.send(null);
-};
 
-xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function () {
   var DONE = 4; // readyState 4 means the request is done.
   var OK = 200; // status 200 is a successful return.
   if (xhr.readyState === DONE) {
     if (xhr.status === OK) 
-      console.log(xhr.responseText); // 'This is the returned text.'
+      diagnostic.textContent = xhr.responseText; // 'This is the returned text.'
     } else {
-      console.log('Error: ' + xhr.status); // An error occurred during the request.
+      diagnostic.textContent = 'Error: ' + xhr.status; // An error occurred during the request.
     }
-}
+  }
+
+  // var xmlHttp = new XMLHttpRequest();
+  // xmlHttp.onreadystatechange = function() { 
+  // if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+  //   //callback(xmlHttp.responseText);
+  //   console.log(xmlHttp.queryresult);
+
+  //   diagnostic.textContent = xmlHttp.queryresult;
+  // }
+
+  // // http://www.whateverorigin.org/get?url=http://api.wolframalpha.com/v2/query?appid=27LAYV-JVWUHLR5JQ&input=population%20of%20france&callback=?
+
+  // xmlHttp.open("GET", "https://api.wolframalpha.com/v1/result?i=What+is+the+stock+price+of+Twitter%3F&appid=DEMO", true); // true for asynchronous 
+  // xmlHttp.send(null);
+};
+
+
 
 // Your use of the YouTube API must comply with the Terms of Service:
 // https://developers.google.com/youtube/terms

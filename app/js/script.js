@@ -35,7 +35,7 @@ clickMe.onclick = function() {
 	diagnostic.innerHTML = 'Listening...';
 	
   recognition.start();
-  //answerMe('what is the share price of twitter');
+  //answerMe('how old is harry styles'); // testing
 
 }
 
@@ -90,22 +90,76 @@ recognition.onerror = function(event) {
 }
 
 function answerMe(question) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.wolframalpha.com/v1/result?i=' + question + '&appid=27LAYV-JVWUHLR5JQ');
-  xhr.send(null);
+  // var xhr = new XMLHttpRequest();
+  // xhr.open('GET', 'https://api.wolframalpha.com/v1/result?i=' + question + '&appid=27LAYV-JVWUHLR5JQ');
+  // xhr.send(null);
 
-  xhr.onreadystatechange = function () {
-  var DONE = 4; // readyState 4 means the request is done.
-  var OK = 200; // status 200 is a successful return.
-  if (xhr.readyState === DONE) {
-    if (xhr.status === OK) 
-      titleField.textContent = xhr.responseText; // 'This is the returned text.'
-      console.log(xhr.responseText);
+  // xhr.onreadystatechange = function () {
+  // var DONE = 4; // readyState 4 means the request is done.
+  // var OK = 200; // status 200 is a successful return.
+  // if (xhr.readyState === DONE) {
+  //   if (xhr.status === OK) 
+  //     titleField.textContent = xhr.responseText; // 'This is the returned text.'
+  //     console.log(xhr.responseText);
+  //   } else {
+  //     titleField.textContent = 'Sorry: ' + xhr.responseText; // An error occurred during the request.
+  //     console.log(xhr.status);
+  //   }
+  // }
+
+  // callback(api, function() {
+  //   console.log('done');
+  // });
+
+  // var api = 'https://api.wolframalpha.com/v2/query?input=' + question + '&format=plaintext&output=JSON&appid=27LAYV-JVWUHLR5JQ';
+
+  // function callback(question, callback) {
+  //   console.log('addScript');
+  //   var api = 'https://api.wolframalpha.com/v2/query?input=' + question + '&format=plaintext&output=JSON&appid=27LAYV-JVWUHLR5JQ';
+  //   var s = document.createElement("script");
+  //   s.src = api;
+  //   document.body.appendChild(s);
+  //   callback();
+  // }
+
+  // function myFunc(data) {
+  //   // var jsonp = JSONP_CALLBACK_FUNCTION(titleField.textContent);
+  //   // titleField.textContent = jsonp;
+  //   // console.log(data);
+  //   //titleField.textContent = data.queryresult.pods[1].subpods[0].plaintext;
+  // }
+
+  var request = new XMLHttpRequest();   
+
+  request.open('GET', 'https://api.wolframalpha.com/v2/query?input=' + question + '&format=plaintext&output=JSON&appid=27LAYV-JVWUHLR5JQ', true);
+
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      // Success!
+      
+      // console.log(JSON.parse(request.responseText))
+      //var data = JSON.parse(request.responseText);
+
+
+
+      var data = JSON.parse(request.responseText);
+      titleField.textContent = data.queryresult.pods[1].subpods[0].plaintext;
+
+
     } else {
-      titleField.textContent = 'Error: ' + xhr.status; // An error occurred during the request.
-      console.log(xhr.status);
+      // We reached our target server, but it returned an error
+      console.log(request.status);
     }
-  }
+  };
+
+  request.onerror = function() {
+    // There was a connection error of some sort
+  };
+
+  request.send();
+
+
+
 };
 
 

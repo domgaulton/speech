@@ -131,7 +131,7 @@ function answerMe(question) {
 
   var request = new XMLHttpRequest();   
 
-  request.open('GET', 'https://api.wolframalpha.com/v2/query?input=' + question + '&format=plaintext&output=JSON&appid=27LAYV-JVWUHLR5JQ', true);
+  request.open('GET', 'https://cors-anywhere.herokuapp.com/https://api.wolframalpha.com/v2/query?input=' + question + '&format=plaintext&output=JSON&appid=27LAYV-JVWUHLR5JQ', true);
 
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {

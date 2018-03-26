@@ -140,8 +140,6 @@ function answerMe(question) {
       // console.log(JSON.parse(request.responseText))
       //var data = JSON.parse(request.responseText);
 
-
-
       var data = JSON.parse(request.responseText);
       titleField.textContent = data.queryresult.pods[1].subpods[0].plaintext;
 

@@ -1,3 +1,4 @@
+```js
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 // var SpeechSynthesisUtterance = SpeechSynthesisUtterance || webkitSpeechSynthesisUtterance
 
@@ -30,10 +31,10 @@ var ytPlayer = document.querySelector('#player');
 var speech;
 
 clickMe.onclick = function() {
-	
-	// console.log('Listening...');
-	diagnostic.innerHTML = 'Listening...';
-	
+  
+  // console.log('Listening...');
+  diagnostic.innerHTML = 'Listening...';
+  
   recognition.start();
   //answerMe('how old is harry styles'); // testing
 
@@ -46,28 +47,28 @@ clickMe.onclick = function() {
 
 
 recognition.onresult = function(event) {
-	// The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
-	// The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
-	// It has a getter so it can be accessed like an array
-	// The [last] returns the SpeechRecognitionResult at the last position.
-	// Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
-	// These also have getters so they can be accessed like arrays.
-	// The [0] returns the SpeechRecognitionAlternative at position 0.
-	// We then return the transcript property of the SpeechRecognitionAlternative object
+  // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
+  // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
+  // It has a getter so it can be accessed like an array
+  // The [last] returns the SpeechRecognitionResult at the last position.
+  // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
+  // These also have getters so they can be accessed like arrays.
+  // The [0] returns the SpeechRecognitionAlternative at position 0.
+  // We then return the transcript property of the SpeechRecognitionAlternative object
 
-	// console.log(event);
+  // console.log(event);
 
-	// var last = event.results.length - 1;
-	// var speech = event.results[last][0].transcript;
-	
-	var speech = event.results[0][0].transcript;
+  // var last = event.results.length - 1;
+  // var speech = event.results[last][0].transcript;
+  
+  var speech = event.results[0][0].transcript;
 
-	// diagnostic.textContent = 'Result received: ' + speech + '. Confidence Level: ' + event.results[0][0].confidence;
-	
-	diagnostic.textContent = "You said: " + speech;
-	//transcript.textContent = speech;
-	// bg.style.backgroundColor = speech;
-	// console.log('Confidence: ' + event.results[0][0].confidence);
+  // diagnostic.textContent = 'Result received: ' + speech + '. Confidence Level: ' + event.results[0][0].confidence;
+  
+  diagnostic.textContent = "You said: " + speech;
+  //transcript.textContent = speech;
+  // bg.style.backgroundColor = speech;
+  // console.log('Confidence: ' + event.results[0][0].confidence);
 
   if ( speech.startsWith("play") ) {
     searchYouTube(speech);
@@ -77,16 +78,16 @@ recognition.onresult = function(event) {
 }
 
 recognition.onspeechend = function() {
-	recognition.stop();
+  recognition.stop();
 }
 
 // recognition.onnomatch = function(event) {
-// 	diagnostic.textContent = "I didn't recognise that color.";
+//  diagnostic.textContent = "I didn't recognise that color.";
 // }
 
 recognition.onerror = function(event) {
-	// console.log(event.error);
-	diagnostic.textContent = 'Error occurred: ' + event.error;
+  // console.log(event.error);
+  diagnostic.textContent = 'Error occurred: ' + event.error;
 }
 
 function answerMe(question) {
@@ -186,7 +187,7 @@ function onYouTubeApiLoad() {
 }
 
 function searchYouTube(result) {
-	// console.log('search'+result);
+  // console.log('search'+result);
     // Use the JavaScript client library to create a search.list() API call.
     var request = gapi.client.youtube.search.list({
         part: 'snippet',
@@ -265,7 +266,7 @@ function youtubePlayer(ytID) {
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
-	event.target.playVideo();
+  event.target.playVideo();
 }
 
 // // 5. The API calls this function when the player's state changes.
@@ -281,4 +282,4 @@ function onPlayerReady(event) {
 // function stopVideo() {
 // player.stopVideo();
 // }
-
+```

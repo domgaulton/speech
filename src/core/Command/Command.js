@@ -1,7 +1,7 @@
 import React from 'react';
-import './SpeechCommand.scss';
+import './Command.scss';
 
-const SpeechCommand = ({ onListen }) => {
+const Command = ({ onListen }) => {
   return (
     <div>
       <p>Instructions</p>
@@ -19,4 +19,4 @@ const SpeechCommand = ({ onListen }) => {
   );
 }
 
-export default SpeechCommand;
+export default Command;

@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import Youtube from './components/Youtube/Youtube';
-import SpeechCommand from './core/SpeechCommand/SpeechCommand';
+import Command from './core/Command/Command';
+import YoutubeSearch from 'youtube-search';
+import YoutubePlayer from './components/Youtube/YoutubePlayer';
+
+const opts = {
+  maxResults: 1,
+  key: 'AIzaSyCb0WevBvVXfVec8vVLauCx6UPE0a0ns2E',
+  type: 'video'
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       command: '',
-      youtubeSearch: 'Adele someone like you'
+      youtubeSearch: ''
     };
   }
 
-  listen = () => {
+  startListening = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = 'en-GB';
@@ -27,14 +35,22 @@ class App extends Component {
       const { transcript } = event.results[0][0];
       console.log(transcript);
 
-      this.setState({command: transcript});
+      this.setState({ command: transcript });
       diagnostic.textContent = `You said: ${transcript}`;
       let updatedCommand = this.state.command;
 
+      // RUN COMMANDS HERE
       if (updatedCommand.match(/search youtube for/i)) {
         console.log('RUNNING YOUTUBE SCRIPT!');
         updatedCommand = updatedCommand.substring(18);
-        this.setState({youtubeSearch: updatedCommand});
+        // this.setState({ youtubeSearch: updatedCommand });
+
+        YoutubeSearch(updatedCommand, opts, (err, results) => {
+          if(err) return console.log(err);
+          const id = results[0].id;
+          console.log(id);
+          this.setState({ youtubeSearch: id });
+        });
       }
     };
 
@@ -53,8 +69,8 @@ class App extends Component {
       <div>
         <p>"Search Youtube For"...</p>
         <p>"Please Tell Me"...</p>
-        <SpeechCommand onListen={this.listen} />
-        <Youtube searchResult={this.state.youtubeSearch} />
+        <Command onListen={this.startListening} />
+        <YoutubePlayer youtubeId={this.state.youtubeSearch} />
       </div>
     );
   }

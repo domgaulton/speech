@@ -9,7 +9,8 @@
   ],
   "rules": {
     "no-console": 0,
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "indent": [2, 2]
   },
   "plugins": [
     "html", 

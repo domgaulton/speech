@@ -2,26 +2,20 @@ import React, { Component } from 'react';
 import './Youtube.scss';
 
 class Youtube extends Component {
-  constructor() {
-    super()
-    this.state = {
-      youtubeId: ''
-    }
+  componentDidMount() {
+    const youtubeSearch = this.props.searchResult;
+    console.log(youtubeSearch);
   }
 
-  loadVideo(e){
-    console.log(e)
-  }
-  render() {
-    return (
+  render(){
+    return(
       <div>
-        <p onClick={this.loadVideo}>Youtube</p>
-        <p className="ytID"></p>
+        <p className="ytID">{this.props.searchResult}</p>
         <img alt="Youtube Thumbnail" className="thumbnail" src="" />
         <div id="player"></div>
       </div>
-    );
-  };
+    );  
+  }
 }
 
 export default Youtube;

@@ -1,6 +1,5 @@
 import React from 'react';
 import './Youtube.scss';
-import Youtube from './Youtube';
 import ReactYoutube from 'react-youtube';
 
 const opts = {
@@ -10,7 +9,7 @@ const opts = {
 };
 
 const YoutubePlayer = ({ youtubeId }) => {
-  console.log(youtubeId);
+  // console.log(youtubeId);
     return(
       <div>
         <ReactYoutube

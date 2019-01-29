@@ -69,7 +69,7 @@ class App extends Component {
       <div>
         <p>"Search Youtube For"...</p>
         <p>"Please Tell Me"...</p>
-        <Command onListen={this.startListening} />
+        <Command onStartListening={this.startListening} />
         <YoutubePlayer youtubeId={this.state.youtubeSearch} />
       </div>
     );

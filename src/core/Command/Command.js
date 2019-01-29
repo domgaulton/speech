@@ -1,14 +1,14 @@
 import React from 'react';
 import './Command.scss';
 
-const Command = ({ onListen }) => {
+const Command = ({ onStartListening }) => {
   return (
     <div>
       <p>Instructions</p>
       <button 
         className="click-me" 
         type="button" 
-        onClick={onListen}
+        onClick={onStartListening}
       >
         Click Me
       </button>

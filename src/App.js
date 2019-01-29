@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import API_KEYS from './components/config/api-keys.js';
+import API_KEYS from './components/config/apiKeys.js';
+import triggerKeys from './components/config/triggerKeys.js';
 import YoutubeSearch from 'youtube-search';
 import YoutubePlayer from './components/Youtube/YoutubePlayer';
 import Question from './components/Question/Question';
@@ -9,11 +10,6 @@ const opts = {
   key: API_KEYS.youtube,
   type: 'video'
 };
-
-const triggerKeys = {
-  youtube: "search youtube for",
-  question: "what is the"
-}
 
 class App extends Component {
   
@@ -25,15 +21,7 @@ class App extends Component {
     };
   };
 
-  commandTrigger = (userInput) => {
-    console.log(userInput);
-    
-    // INPUT KEYS
-
-    // const youtubeKey = "search youtube for";
-    // const questionKey = "what is the";
-    
-    // FUNCTIONS
+  commandTrigger = (userInput) => {    
     if ( userInput.match(triggerKeys.youtube) ) {
       const strippedInput = userInput.replace(triggerKeys.youtube,"");
       document.querySelector('.output').textContent = `SEARCHING YOUTUBE FOR... ${strippedInput}`;

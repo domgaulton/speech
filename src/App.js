@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import API_KEYS from './components/config/api-keys.js';
 import YoutubeSearch from 'youtube-search';
 import YoutubePlayer from './components/Youtube/YoutubePlayer';
+import Question from './components/Question/Question';
 
 const opts = {
   maxResults: 1,
@@ -9,32 +10,41 @@ const opts = {
   type: 'video'
 };
 
+const triggerKeys = {
+  youtube: "search youtube for",
+  question: "what is the"
+}
+
 class App extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      command: '',
-      youtubeSearch: ''
+      youtube: '',
+      question: ''
     };
-  }
+  };
 
   commandTrigger = (userInput) => {
     console.log(userInput);
     
     // INPUT KEYS
-    const youtubeSearchKey = "search youtube for";
+
+    // const youtubeKey = "search youtube for";
     // const questionKey = "what is the";
     
     // FUNCTIONS
-    if ( userInput.match(youtubeSearchKey) ) {
-      const strippedInput = userInput.replace(youtubeSearchKey,"");
+    if ( userInput.match(triggerKeys.youtube) ) {
+      const strippedInput = userInput.replace(triggerKeys.youtube,"");
       document.querySelector('.output').textContent = `SEARCHING YOUTUBE FOR... ${strippedInput}`;
 
       YoutubeSearch(strippedInput, opts, (err, results) => {
         if(err) return console.log(err);
         const id = results[0].id;
-        this.setState({ youtubeSearch: id });
+        this.setState({ youtube: id });
       });
+    } else if ( userInput.match(triggerKeys.question) ) {
+      this.setState({ question: userInput });
     }
   }
 
@@ -69,9 +79,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>Instructions</p>
-        <p>"Search Youtube For"...</p>
-        <p>"Please Tell Me"...</p>
+        <p>Questions to ask</p>
+        <p>"{triggerKeys.youtube}"...</p>
+        <p>"{triggerKeys.question}"...</p>
         <button 
           className="click-me" 
           type="button" 
@@ -82,7 +92,8 @@ class App extends Component {
         <div>
           <p className="output"></p>
         </div>
-        <YoutubePlayer youtubeId={this.state.youtubeSearch} />
+        <YoutubePlayer youtubeId={this.state.youtube} />
+        <Question question={this.state.question} />
       </div>
     );
   }

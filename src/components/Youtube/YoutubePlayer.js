@@ -9,15 +9,14 @@ const opts = {
 };
 
 const YoutubePlayer = ({ youtubeId }) => {
-  // console.log(youtubeId);
-    return(
-      <div>
-        <ReactYoutube
-          videoId={youtubeId}
-          opts={opts}
-        />
-      </div>
-    );  
+  return(
+    <div>
+      <ReactYoutube
+        videoId={youtubeId}
+        opts={opts}
+      />
+    </div>
+  );  
 };
 
 export default YoutubePlayer;

@@ -39,9 +39,12 @@ class App extends Component {
   }
 
   startListening = () => {
+    // Variables Needed
     const audioContext = new AudioContext();
+    const microphoneFeedback = document.querySelector(".microphoneFeedback");
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
+
     recognition.lang = 'en-GB';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
@@ -50,13 +53,11 @@ class App extends Component {
     output.innerHTML = 'Listening...';
 
     // START MICROPHONE Courtesy www.0AV.com, LGPL license or as set by forked host, Travis Holliday, https://codepen.io/travisholliday/pen/gyaJk (modified by fixing for browser security change)
-    console.log ("starting microphone...");
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     if (navigator.getUserMedia) {
       navigator.getUserMedia({
         audio: true
-      }, function(stream) {
-        // const audioContext = new AudioContext();
+      }, (stream) => {
         const analyser = audioContext.createAnalyser();
         const microphone = audioContext.createMediaStreamSource(stream);
         const javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
@@ -65,30 +66,22 @@ class App extends Component {
         microphone.connect(analyser);
         analyser.connect(javascriptNode);
         javascriptNode.connect(audioContext.destination);
-        const microphoneFeedback = document.querySelector(".microphoneFeedback");
-        javascriptNode.onaudioprocess = function() {
-          var array = new Uint8Array(analyser.frequencyBinCount);
+        javascriptNode.onaudioprocess = () => {
+          const array = new Uint8Array(analyser.frequencyBinCount);
           analyser.getByteFrequencyData(array);
-          var values = 0;
-          var length = array.length;
+          let values = 0;
+          const { length } = array;
           for (var i = 0; i < length; i++) {
             values += (array[i]);
           }
-          var average = (values / length)/100;
+          const average = ((values / length) / 100) + 0.3;
           console.log(average);
+          microphoneFeedback.classList.add('listening');
           microphoneFeedback.style.transform = `scale(${average})`;
-          //console.log(Math.round(average - 40));
-          // canvasContext.clearRect(0, 0, 150, 300);
-          // canvasContext.fillStyle = '#FF0A55'; //was BadA55 (very cute)
-          // canvasContext.fillRect(0, 300 - average, 150, 300);
-          // canvasContext.fillStyle = '#F62626';
-          // canvasContext.font = "24px impact";
-          // canvasContext.fillText(Math.round(average - 40), 2, 30);
-          // console.log (average);
-        } // end fn stream
+        };
       },
-      function(err) {
-        console.log("The following error occured: " + err.name)
+      (err) => {
+        console.log(`The following error occured: ${err.name}`);
       });
     } else {
       console.log("getUserMedia not supported");
@@ -102,6 +95,7 @@ class App extends Component {
       transcript = transcript.toLowerCase();
       this.commandTrigger(transcript);
       audioContext.close();
+      microphoneFeedback.classList.remove('listening');
     };
 
     recognition.onspeechend = () => {

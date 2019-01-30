@@ -4,4 +4,10 @@
 	height: 100px;
 	border-radius: 50px;
 	margin: 30px auto;
+	-webkit-transition: scale 1s; /* Safari */
+	transition: scale 1s;
+
+	&.listening {
+		background-color: #6af76a;
+	}
 }

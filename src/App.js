@@ -6,7 +6,7 @@ import './index.css';
 import './App.scss';
 
 import YoutubeSearch from 'youtube-search';
-import YoutubePlayer from './components/Youtube/YoutubePlayer';
+import Youtube from './components/Youtube/Youtube';
 import Question from './components/Question/Question';
 
 const opts = {
@@ -35,6 +35,7 @@ class App extends Component {
         const id = results[0].id;
         this.setState({ youtube: id });
       });
+
     } else if ( userInput.match(triggerKeys.question) ) {
       this.setState({ question: userInput });
     }
@@ -127,7 +128,7 @@ class App extends Component {
         <div>
           <p className="output"></p>
         </div>
-        <YoutubePlayer youtubeId={this.state.youtube} />
+        <Youtube youtubeId={this.state.youtube} />
         <Question question={this.state.question} />
       </div>
     );

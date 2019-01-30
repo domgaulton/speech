@@ -8,7 +8,7 @@ const opts = {
   }
 };
 
-const YoutubePlayer = ({ youtubeId }) => {
+const Youtube = ({ youtubeId }) => {
   return(
     <div>
       <ReactYoutube
@@ -19,4 +19,4 @@ const YoutubePlayer = ({ youtubeId }) => {
   );  
 };
 
-export default YoutubePlayer;
+export default Youtube;

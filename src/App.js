@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import API_KEYS from './components/config/apiKeys.js';
+import API_KEYS from './config/apiKeys.js';
+import triggerKeys from './config/triggerKeys.js';
+
 import './index.css';
 import './App.scss';
-import triggerKeys from './components/config/triggerKeys.js';
+
 import YoutubeSearch from 'youtube-search';
 import YoutubePlayer from './components/Youtube/YoutubePlayer';
 import Question from './components/Question/Question';

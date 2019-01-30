@@ -4,8 +4,9 @@
     "browser": true
   },
   "extends": [
+    "eslint:recommended",
     "airbnb",
-    "react"
+    "plugin:react/recommended"
   ],
   "rules": {
     "no-console": 0,

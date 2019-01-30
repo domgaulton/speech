@@ -1,6 +1,6 @@
 const triggerKeys = {
   youtube: "search youtube for",
-  question: "what is the"
+  question: "how old is"
 }
 
 export default triggerKeys;

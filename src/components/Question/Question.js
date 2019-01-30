@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import API_KEYS from './../config/apiKeys.js';
+import API_KEYS from './../../config/apiKeys.js';
 import './Question.scss';
 import axios from 'axios';
 

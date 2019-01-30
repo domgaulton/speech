@@ -9,11 +9,11 @@ import YoutubeSearch from 'youtube-search';
 import Youtube from './components/Youtube/Youtube';
 import Question from './components/Question/Question';
 
-const opts = {
-  maxResults: 1,
-  key: API_KEYS.youtube,
-  type: 'video'
-};
+// const opts = {
+//   maxResults: 1,
+//   key: API_KEYS.youtube,
+//   type: 'video'
+// };
 
 class App extends Component {
   
@@ -30,11 +30,13 @@ class App extends Component {
       const strippedInput = userInput.replace(triggerKeys.youtube,"");
       document.querySelector('.output').textContent = `SEARCHING YOUTUBE FOR... ${strippedInput}`;
 
-      YoutubeSearch(strippedInput, opts, (err, results) => {
-        if(err) return console.log(err);
-        const id = results[0].id;
-        this.setState({ youtube: id });
-      });
+      // YoutubeSearch(strippedInput, opts, (err, results) => {
+      //   if(err) return console.log(err);
+      //   const id = results[0].id;
+      //   this.setState({ youtube: id });
+      // });
+
+      this.setState({ youtube: strippedInput });
 
     } else if ( userInput.match(triggerKeys.question) ) {
       this.setState({ question: userInput });
@@ -78,7 +80,7 @@ class App extends Component {
             values += (array[i]);
           }
           const average = ((values / length) / 100) + 0.3;
-          console.log(average);
+          // console.log(average);
           microphoneFeedback.classList.add('listening');
           microphoneFeedback.style.transform = `scale(${average})`;
         };
@@ -128,7 +130,7 @@ class App extends Component {
         <div>
           <p className="output"></p>
         </div>
-        <Youtube youtubeId={this.state.youtube} />
+        <Youtube youtube={this.state.youtube} />
         <Question question={this.state.question} />
       </div>
     );

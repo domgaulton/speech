@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import API_KEYS from './config/apiKeys.js';
+// import API_KEYS from './config/apiKeys.js';
 import triggerKeys from './config/triggerKeys.js';
 
 import './index.css';
 import './App.scss';
 
-import YoutubeSearch from 'youtube-search';
+// import YoutubeSearch from 'youtube-search';
 import Youtube from './components/Youtube/Youtube';
 import Question from './components/Question/Question';
-
-// const opts = {
-//   maxResults: 1,
-//   key: API_KEYS.youtube,
-//   type: 'video'
-// };
 
 class App extends Component {
   
@@ -29,12 +23,6 @@ class App extends Component {
     if ( userInput.match(triggerKeys.youtube) ) {
       const strippedInput = userInput.replace(triggerKeys.youtube,"");
       document.querySelector('.output').textContent = `SEARCHING YOUTUBE FOR... ${strippedInput}`;
-
-      // YoutubeSearch(strippedInput, opts, (err, results) => {
-      //   if(err) return console.log(err);
-      //   const id = results[0].id;
-      //   this.setState({ youtube: id });
-      // });
 
       this.setState({ youtube: strippedInput });
 

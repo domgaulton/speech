@@ -29,18 +29,11 @@ class Youtube extends Component {
 
   componentDidUpdate = (previousYoutube) => {
     const youtubeQuery = this.props.youtube;
-    // console.log('YT Previous', previousYoutube.youtube);
-    // console.log('YT Query', youtubeQuery);
-    // debugger;
      if (previousYoutube.youtube !== youtubeQuery) {
-      // previousYoutube.youtube = youtubeQuery;
-      // debugger;
       YoutubeSearch(youtubeQuery, searchOpts, (err, results) => {
         if(err) return console.log(err);
         const id = results[0].id;
-        // console.log('set state');
         this.setState({ youtubeId: id });
-        // console.log('state set', this.state.youtubeId)
       });
      }
    }

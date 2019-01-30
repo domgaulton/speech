@@ -8,8 +8,6 @@ const previousQuestion = "";
 class Question extends Component {
 
   componentDidUpdate = (previousQuestion) => {
-    // console.log('Q', previousQuestion);
-    // console.log('Q', this.props.question);
      if (previousQuestion !== this.props.question) {
        this.answerQuestion(this.props.question);
      }
@@ -25,9 +23,8 @@ class Question extends Component {
       }
     })
     .then(function (response) {
-      // console.log(response);
       const answer = response.data.queryresult.pods[1].subpods[0].plaintext;
-      console.log(answer);
+      document.querySelector('.output').textContent = answer;
     })
     .catch(function (error) {
       // console.log(error);

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-// import API_KEYS from './config/apiKeys.js';
 import triggerKeys from './config/triggerKeys.js';
+// import levels from './microphoneLevel.js';
 
 import './index.css';
 import './App.scss';
 
-// import YoutubeSearch from 'youtube-search';
 import Youtube from './components/Youtube/Youtube';
 import Question from './components/Question/Question';
 
@@ -32,9 +31,7 @@ class App extends Component {
   }
 
   startListening = () => {
-    // Variables Needed
-    const audioContext = new AudioContext();
-    const microphoneFeedback = document.querySelector(".microphoneFeedback");
+    
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
@@ -46,6 +43,10 @@ class App extends Component {
     output.innerHTML = 'Listening...';
 
     // START MICROPHONE Courtesy www.0AV.com, LGPL license or as set by forked host, Travis Holliday, https://codepen.io/travisholliday/pen/gyaJk (modified by fixing for browser security change)
+    // Variables Needed
+    const audioContext = new AudioContext();
+    const microphoneFeedback = document.querySelector(".microphoneFeedback");
+
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     if (navigator.getUserMedia) {
       navigator.getUserMedia({

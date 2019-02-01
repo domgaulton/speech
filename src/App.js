@@ -23,9 +23,12 @@ class App extends Component {
       const strippedInput = userInput.replace(commandKeys.youtube.searchTerm,"");
       document.querySelector('.output').textContent = `${commandKeys.youtube.onResult} ${strippedInput}`;
       this.setState({ youtube: strippedInput });
+
     } else if ( userInput.match(commandKeys.question.searchTerm) ) {
+      document.querySelector('.output').textContent = `${userInput}?`;
       this.setState({ question: userInput });
     }
+    
   }
 
   startListening = () => {
@@ -70,6 +73,7 @@ class App extends Component {
           // console.log(average);
           microphoneFeedback.classList.add('listening');
           microphoneFeedback.style.transform = `scale(${average})`;
+          microphoneFeedback.style.opacity = `${average*2}`;
         };
       },
       (err) => {

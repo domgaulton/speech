@@ -26,8 +26,8 @@ class Question extends Component {
         }
       })
       .then(response => { // use arrow function so we can pass this.setState later!
+        console.log(response);
         const answer = response.data.queryresult.pods[1].subpods[0].plaintext;
-        console.log(answer);
         this.setState({ questionAnswer: answer });
       }) 
       .catch(function (error) {

@@ -1,6 +1,12 @@
 # React Siri
 
+## Running / Cloning
+* `git clone https://github.com/domgaulton/speech.git`
+* `cd speech && npm start`
+
+
 ## Open Source
+* Uses create-react-app frame work
 * Add your components and trigger a response using triggerKeys!
 
 ## Current Issues

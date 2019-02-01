@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import triggerKeys from './config/triggerKeys.js';
+import commandKeys from './config/commandKeys.js';
 // import levels from './microphoneLevel.js';
 
 import './index.css';
@@ -19,13 +19,11 @@ class App extends Component {
   };
 
   commandTrigger = (userInput) => {    
-    if ( userInput.match(triggerKeys.youtube) ) {
-      const strippedInput = userInput.replace(triggerKeys.youtube,"");
-      document.querySelector('.output').textContent = `SEARCHING YOUTUBE FOR... ${strippedInput}`;
-
+    if ( userInput.match(commandKeys.youtube.searchTerm) ) {
+      const strippedInput = userInput.replace(commandKeys.youtube.searchTerm,"");
+      document.querySelector('.output').textContent = `${commandKeys.youtube.onResult} ${strippedInput}`;
       this.setState({ youtube: strippedInput });
-
-    } else if ( userInput.match(triggerKeys.question) ) {
+    } else if ( userInput.match(commandKeys.question.searchTerm) ) {
       this.setState({ question: userInput });
     }
   }
@@ -106,8 +104,8 @@ class App extends Component {
     return (
       <div>
         <h1>Questions you can ask</h1>
-        <p>"{triggerKeys.youtube}"...</p>
-        <p>"{triggerKeys.question}"...</p>
+        <p>"{commandKeys.youtube.searchTerm}"...</p>
+        <p>"{commandKeys.question.searchTerm}"...</p>
         <div className="microphoneFeedback"></div>
         <button 
           className="click-me" 

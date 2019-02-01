@@ -25,8 +25,9 @@ class App extends Component {
       this.setState({ youtube: strippedInput });
 
     } else if ( userInput.match(commandKeys.question.searchTerm) ) {
-      document.querySelector('.output').textContent = `${userInput}?`;
-      this.setState({ question: userInput });
+      const strippedInput = userInput.replace(commandKeys.question.searchTerm,"");
+      document.querySelector('.output').textContent = `${commandKeys.question.onResult} ${strippedInput}?`;
+      this.setState({ question: strippedInput });
     }
     
   }
@@ -47,6 +48,7 @@ class App extends Component {
     // Variables Needed
     const audioContext = new AudioContext();
     const microphoneFeedback = document.querySelector(".microphoneFeedback");
+    const microphoneUX = document.querySelector(".microphoneUX");
 
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     if (navigator.getUserMedia) {
@@ -74,6 +76,12 @@ class App extends Component {
           microphoneFeedback.classList.add('listening');
           microphoneFeedback.style.transform = `scale(${average})`;
           microphoneFeedback.style.opacity = `${average*2}`;
+
+          microphoneUX.classList.add('listening');
+          microphoneUX.style.transform = `scale(${average * 1.4})`;
+          microphoneUX.style.opacity = `${average*2}`;
+          microphoneUX.style.borderRadius = `${average * 150}% / ${average * 50}%`;
+          microphoneUX.style.animation = `rotating ${average}s linear infinite`;
         };
       },
       (err) => {
@@ -110,7 +118,9 @@ class App extends Component {
         <h1>Questions you can ask</h1>
         <p>"{commandKeys.youtube.searchTerm}"...</p>
         <p>"{commandKeys.question.searchTerm}"...</p>
-        <div className="microphoneFeedback"></div>
+        <div className="microphoneFeedback">
+          <div className="microphoneUX"></div>
+        </div>
         <button 
           className="click-me" 
           type="button" 

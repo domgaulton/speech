@@ -11,3 +11,4 @@
 
 ## Future Features
 * Output / Feedback as a global object
+* Conditional Rendering - https://reactjs.org/docs/conditional-rendering.html

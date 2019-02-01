@@ -39,12 +39,17 @@ class Youtube extends Component {
    }
   
   render() {
+    const youtubeIdString = this.state.youtubeId;
+    let video;
+    if (youtubeIdString !== '') {
+      video = <ReactYoutube videoId={this.state.youtubeId} opts={playerOpts}/>;
+    } else {
+      video = "";
+    }
+
     return(
       <div>
-        <ReactYoutube
-          videoId={this.state.youtubeId}
-          opts={playerOpts}
-        />
+        {video}
       </div>
     );  
   }

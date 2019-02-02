@@ -17,4 +17,6 @@
 
 ## Future Features
 * Output / Feedback as a global object
+* Move Microphone UI to own function / component
+* Use canvas for Microphone input level UI
 * Conditional Rendering - https://reactjs.org/docs/conditional-rendering.html

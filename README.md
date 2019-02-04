@@ -4,10 +4,11 @@
 * `git clone https://github.com/domgaulton/speech.git`
 * `cd speech && npm start`
 
-
 ## Open Source
 * Uses create-react-app frame work
-* Add your components and trigger a response using triggerKeys!
+* Add your voice input trigger and repsonse suggestion to triggerKeys object `config/commandKeys.js`
+* Set up your command within `commandTrigger` function in `App.js` with conditional component formatting
+* Add your component to `components/` folder with scss file
 
 ## Current Issues
 1. Is the structure of the project correct? Could / Should it be done another way? 

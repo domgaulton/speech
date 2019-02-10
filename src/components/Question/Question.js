@@ -3,8 +3,6 @@ import API_KEYS from './../../config/apiKeys.js';
 import './Question.scss';
 import axios from 'axios';
 
-// const previousQuestion = "";
-
 class Question extends Component {
 
   constructor(props) {
@@ -14,19 +12,18 @@ class Question extends Component {
     };
   };
 
-  componentDidUpdate = (search) => {
-    const question = this.props.question;
-    if (search.question !== question) {
+  componentDidUpdate = (prevProps) => {
+    if (this.props.question !== prevProps.question) {
       axios.get('https://cors-anywhere.herokuapp.com/https://api.wolframalpha.com/v2/query', {
         params: {
-          input: question,
+          input: this.props.question,
           format: 'plaintext',
           output: 'JSON',
           appid: API_KEYS.question
         }
       })
       .then(response => { // use arrow function so we can pass this.setState later!
-        console.log(response);
+        // console.log(response);
         const answer = response.data.queryresult.pods[1].subpods[0].plaintext;
         this.setState({ questionAnswer: answer });
       }) 

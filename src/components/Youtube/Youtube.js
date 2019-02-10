@@ -16,8 +16,6 @@ const searchOpts = {
   type: 'video'
 };
 
-// const previousYoutube = "";
-
 class Youtube extends Component {
 
   constructor(props) {
@@ -27,17 +25,12 @@ class Youtube extends Component {
     };
   };
 
-  componentDidUpdate = (search) => {
-    // console.log(this.youtube);
-    // console.log(this.props.youtube);
-        // console.log(previousYoutube);
-    const youtubeQuery = this.props.youtube;
-     if (search.youtube !== youtubeQuery) {
-      YoutubeSearch(youtubeQuery, searchOpts, (err, results) => {
+  componentDidUpdate = (prevProps) => {
+     if (this.props.youtube !== prevProps.youtube) {
+      YoutubeSearch(this.props.youtube, searchOpts, (err, results) => {
         if(err) return console.log(err);
         const id = results[0].id;
         this.setState({ youtubeId: id });
-        // console.log(id);
       });
      }
    }
